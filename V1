@@ -1,0 +1,44 @@
+<div class="section">
+  <h2>Match Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 60px;">Match</th>
+        <th>Home Player</th>
+        <th style="width: 60px;">Home PTS</th>
+        <th>Away Player</th>
+        <th style="width: 60px;">Away PTS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="width: 60px;">1</td><td><input type="text" name="homePlayer1"></td><td><input type="number" name="homePTS1"></td><td><input type="text" name="awayPlayer1"></td><td><input type="number" name="awayPTS1"></td></tr>
+      <tr><td style="width: 60px;">2</td><td><input type="text" name="homePlayer2"></td><td><input type="number" name="homePTS2"></td><td><input type="text" name="awayPlayer2"></td><td><input type="number" name="awayPTS2"></td></tr>
+      <tr><td style="width: 60px;">3</td><td><input type="text" name="homePlayer3"></td><td><input type="number" name="homePTS3"></td><td><input type="text" name="awayPlayer3"></td><td><input type="number" name="awayPTS3"></td></tr>
+      <tr><td style="width: 60px;">4</td><td><input type="text" name="homePlayer4"></td><td><input type="number" name="homePTS4"></td><td><input type="text" name="awayPlayer4"></td><td><input type="number" name="awayPTS4"></td></tr>
+      <tr><td style="width: 60px;">5</td><td><input type="text" name="homePlayer5"></td><td><input type="number" name="homePTS5"></td><td><input type="text" name="awayPlayer5"></td><td><input type="number" name="awayPTS5"></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="field">
+    <label for="homeTotal">Home Total</label>
+    <input type="number" id="homeTotal" name="homeTotal">
+  </div>
+  <div class="field">
+    <label for="awayTotal">Away Total</label>
+    <input type="number" id="awayTotal" name="awayTotal">
+  </div>
+  <div class="field">
+    <label for="homeCaptain">Home Captain</label>
+    <input type="text" id="homeCaptain" name="homeCaptain">
+  </div>
+  <div class="field">
+    <label for="awayCaptain">Away Captain</label>
+    <input type="text" id="awayCaptain" name="awayCaptain">
+  </div>
+</div>
+
+<div class="submit">
+  <button type="submit">Submit</button>
+</div>
