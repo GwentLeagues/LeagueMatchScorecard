@@ -1,100 +1,151 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gwent Golf Union Scorecard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>League Result Card</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 2rem; background-color: #f9f9f9; }
-    h1 { text-align: center; }
-    form { max-width: 800px; margin: auto; background: #fff; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    .section { margin-bottom: 2rem; }
-    .field { margin-bottom: 1rem; }
-    label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-    input[type="text"], input[type="date"], input[type="number"] { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-    table { width: 100%; border-collapse: collapse; margin-top: 1rem; table-layout: fixed; grid-template-columns: 60px auto 80px auto 80px; }
-    th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: center; }
-    th { background-color: #f0f0f0; }
-    td input[type="text"] { width: 100%; box-sizing: border-box; padding: 0.25rem; }
-    td input[type="number"] { width: 100%; max-width: 60px; box-sizing: border-box; padding: 0.25rem; margin: auto; display: block; }
-    .submit { text-align: center; }
-    button { padding: 0.75rem 2rem; font-size: 1rem; background-color: #008060; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1, h2, h3 { margin-bottom: 5px; }
+    form { max-width: 800px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input[type="text"], input[type="date"], input[type="number"] { width: 100%; padding: 5px; margin-top: 2px; box-sizing: border-box; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    table, th, td { border: 1px solid #333; }
+    th, td { padding: 8px; text-align: center; }
+    /* Column widths: adjust for player names and points */
+    col.player { width: 35%; }
+    col.pts { width: 10%; }
+    col.game { width: 10%; }
+    .signatures { display: flex; justify-content: space-between; margin-top: 20px; }
+    .signatures div { width: 48%; }
+    .buttons { margin-top: 20px; }
   </style>
+  <!-- Include html2canvas library -->
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
-  <div style="text-align:center; margin-bottom: 1rem;">
-    <img src="file-KQucBExD8ETqr2Vbr3tVvk" alt="Gwent Golf Union Logo" style="height: 80px;">
-  </div>
-  <h1>Gwent Golf Union Scorecard</h1>
-  <form action="mailto:gguleagues@outlook.com" method="POST" enctype="text/plain">
-    <div class="section">
-      <div class="field">
-        <label for="date">Date</label>
-        <input type="date" id="date" name="date">
-      </div>
-      <div class="field">
-        <label for="venue">Venue</label>
-        <input type="text" id="venue" name="venue">
-      </div>
-      <div class="field">
-        <label for="division">Division</label>
-        <input type="text" id="division" name="division">
-      </div>
-      <div class="field">
-        <label for="homeTeam">Home Team</label>
-        <input type="text" id="homeTeam" name="homeTeam">
-      </div>
-      <div class="field">
-        <label for="awayTeam">Away Team</label>
-        <input type="text" id="awayTeam" name="awayTeam">
-      </div>
-    </div>
+  <h1>GWENT GOLF UNION</h1>
+  <h2>Inter-Club League Golf</h2>
+  <h3>SCORECARD</h3>
 
-    <div class="section">
-      <h2>Match Results</h2>
+  <div id="card-container">
+    <form id="result-form">
+      <label for="match-date">DATE</label>
+      <input type="date" id="match-date" name="date" required>
+
+      <label for="venue">VENUE</label>
+      <input type="text" id="venue" name="venue" required>
+
+      <label for="division">DIVISION</label>
+      <input type="text" id="division" name="division" required>
+
+      <label for="home-team">HOME TEAM</label>
+      <input type="text" id="home-team" name="home_team" required>
+
+      <label for="away-team">AWAY TEAM</label>
+      <input type="text" id="away-team" name="away_team" required>
+
       <table>
+        <colgroup>
+          <col class="game">
+          <col class="player">
+          <col class="pts">
+          <col class="player">
+          <col class="pts">
+        </colgroup>
         <thead>
           <tr>
-            <th style="width: 60px;">Match</th>
+            <th>Game #</th>
             <th>Home Player</th>
-            <th style="width: 60px;">Home PTS</th>
+            <th>Home PTS</th>
             <th>Away Player</th>
-            <th style="width: 60px;">Away PTS</th>
+            <th>Away PTS</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td style="width: 60px;">1</td><td><input type="text" name="homePlayer1"></td><td><input type="number" name="homePTS1"></td><td><input type="text" name="awayPlayer1"></td><td><input type="number" name="awayPTS1"></td></tr>
-          <tr><td style="width: 60px;">2</td><td><input type="text" name="homePlayer2"></td><td><input type="number" name="homePTS2"></td><td><input type="text" name="awayPlayer2"></td><td><input type="number" name="awayPTS2"></td></tr>
-          <tr><td style="width: 60px;">3</td><td><input type="text" name="homePlayer3"></td><td><input type="number" name="homePTS3"></td><td><input type="text" name="awayPlayer3"></td><td><input type="number" name="awayPTS3"></td></tr>
-          <tr><td style="width: 60px;">4</td><td><input type="text" name="homePlayer4"></td><td><input type="number" name="homePTS4"></td><td><input type="text" name="awayPlayer4"></td><td><input type="number" name="awayPTS4"></td></tr>
-          <tr><td style="width: 60px;">5</td><td><input type="text" name="homePlayer5"></td><td><input type="number" name="homePTS5"></td><td><input type="text" name="awayPlayer5"></td><td><input type="number" name="awayPTS5"></td></tr>
+          <!-- Five rows for games -->
+          <tr>
+            <td>1</td>
+            <td><input type="text" name="game1_home_player"></td>
+            <td><input type="number" name="game1_home_pts" min="0"></td>
+            <td><input type="text" name="game1_away_player"></td>
+            <td><input type="number" name="game1_away_pts" min="0"></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><input type="text" name="game2_home_player"></td>
+            <td><input type="number" name="game2_home_pts" min="0"></td>
+            <td><input type="text" name="game2_away_player"></td>
+            <td><input type="number" name="game2_away_pts" min="0"></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><input type="text" name="game3_home_player"></td>
+            <td><input type="number" name="game3_home_pts" min="0"></td>
+            <td><input type="text" name="game3_away_player"></td>
+            <td><input type="number" name="game3_away_pts" min="0"></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><input type="text" name="game4_home_player"></td>
+            <td><input type="number" name="game4_home_pts" min="0"></td>
+            <td><input type="text" name="game4_away_player"></td>
+            <td><input type="number" name="game4_away_pts" min="0"></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><input type="text" name="game5_home_player"></td>
+            <td><input type="number" name="game5_home_pts" min="0"></td>
+            <td><input type="text" name="game5_away_player"></td>
+            <td><input type="number" name="game5_away_pts" min="0"></td>
+          </tr>
+          <tr>
+            <th>TOTAL</th>
+            <td></td>
+            <td><input type="number" name="total_home" min="0"></td>
+            <td></td>
+            <td><input type="number" name="total_away" min="0"></td>
+          </tr>
         </tbody>
       </table>
-    </div>
 
-    <div class="section">
-      <div class="field">
-        <label for="homeTotal">Home Total</label>
-        <input type="number" id="homeTotal" name="homeTotal">
+      <div class="signatures">
+        <div>
+          <label for="home-captain">HOME CAPTAIN</label>
+          <input type="text" id="home-captain" name="home_captain">
+        </div>
+        <div>
+          <label for="away-captain">AWAY CAPTAIN</label>
+          <input type="text" id="away-captain" name="away_captain">
+        </div>
       </div>
-      <div class="field">
-        <label for="awayTotal">Away Total</label>
-        <input type="number" id="awayTotal" name="awayTotal">
-      </div>
-      <div class="field">
-        <label for="homeCaptain">Home Captain</label>
-        <input type="text" id="homeCaptain" name="homeCaptain">
-      </div>
-      <div class="field">
-        <label for="awayCaptain">Away Captain</label>
-        <input type="text" id="awayCaptain" name="awayCaptain">
-      </div>
-    </div>
 
-    <div class="submit">
-      <button type="submit">Submit</button>
-    </div>
-  </form>
+      <p style="margin-top: 20px; font-size: 0.9em;">
+        Card to be completed by the home team captain and sent to: <a href="mailto:gguleagues@outlook.com">gguleagues@outlook.com</a><br>
+        Within 48 hours of completing the match.
+      </p>
+
+      <div class="buttons">
+        <button type="button" id="send-btn">Send</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('send-btn').addEventListener('click', function() {
+      // Capture the card container as an image
+      html2canvas(document.getElementById('card-container')).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const subject = encodeURIComponent('League Result Card');
+        // HTML body with embedded image
+        const body = encodeURIComponent('<p>Please find the result card below:</p><img src="' + imgData + '" alt="Result Card">');
+        const mailtoLink = 'mailto:gguleagues@outlook.com?subject=' + subject + '&body=' + body;
+        // Open default mail client
+        window.location.href = mailtoLink;
+      });
+    });
+  </script>
 </body>
 </html>
